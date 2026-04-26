@@ -293,6 +293,3 @@ curl http://localhost:8000/lab/bulk-update/
 ```
 
 ---
-
-*Laporan ini disusun sebagai bagian dari Lab 05 Optimasi Database*  
-*Mata Kuliah Pemrograman Sisi Server - Universitas Dian Nuswantoro - April 2026*
