@@ -1,3 +1,12 @@
+"""
+Django settings untuk Simple LMS - Lab 05: Optimasi Database
+
+Melanjutkan dari Modul 04 (Django ORM) dengan tambahan:
+- Database PostgreSQL (bukan SQLite)
+- Django Silk untuk query profiling
+- Media files untuk ImageField dan FileField
+"""
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,22 +25,15 @@ ALLOWED_HOSTS = ['*']
 # =============================================================================
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    # Third-party apps
-    'ninja_simple_jwt',
-    # Local apps
-    'courses',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "silk",       # Django Silk - query profiling (Modul 05)
+    "courses",    # Aplikasi Simple LMS kita
 ]
-
-NINJA_JWT = {
-    "ACCESS_TOKEN_LIFETIME": 60 * 5,      # 5 menit
-    "REFRESH_TOKEN_LIFETIME": 60 * 60 * 24  # 1 hari
-}
 
 
 # =============================================================================
@@ -40,6 +42,7 @@ NINJA_JWT = {
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "silk.middleware.SilkyMiddleware",  # Silk harus di posisi awal (setelah Security)
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -86,6 +89,14 @@ DATABASES = {
     }
 }
 
+
+# =============================================================================
+# Django Silk - Konfigurasi Profiling
+# Akses dashboard di: http://localhost:8000/silk/
+# =============================================================================
+
+SILKY_PYTHON_PROFILER = True   # Aktifkan function-level profiling
+SILKY_META = True              # Track query Silk sendiri (untuk transparansi)
 
 
 # =============================================================================

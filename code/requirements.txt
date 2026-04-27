@@ -1,5 +1,4 @@
 Django>=5.1,<5.2
 psycopg2-binary>=2.9,<3.0
 Pillow>=10.0,<11.0
-django-ninja==1.1
-django-ninja-simple-jwt
+django-silk==5.1.0
